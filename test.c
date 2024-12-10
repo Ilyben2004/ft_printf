@@ -130,13 +130,8 @@
 
 //     return 0;
 // }
-
-int main()
+int main ()
 {
-    ft_ret = ft_printf("abcdef%");
-    printf("\n");
-    std_ret = printf("abcdef%");
-    printf("\n");
-    printf("Return: ft_printf = %d, std_printf = %d\n\n", ft_ret, std_ret);
-
+    int ret  = ft_printf("kl%kas%");
+    printf("\n %d ",ret);
 }

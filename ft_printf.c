@@ -4,9 +4,7 @@ int printer(va_list ptr ,char c)
 {
     unsigned long a;
     if(c == 'd' || c == 'i')
-    {
         return (ft_putnbr_fd((int)va_arg(ptr,int),1));
-    }
     else if(c == 'u')
         return (ft_putnbr_fd((unsigned int)va_arg(ptr,unsigned int),1));
     else if (c == 'c')
@@ -22,12 +20,9 @@ int printer(va_list ptr ,char c)
     }
     else if (c == '%')
         return(ft_putchar_fd('%',1));
-    else
-    {
-        ft_putchar_fd('%',1);
-        ft_putchar_fd(c,1);
-        return (2);
-    }
+    else  
+        return ft_putchar_fd('%',1) + ft_putchar_fd(c,1);
+    
 }
 
 
@@ -36,22 +31,29 @@ int ft_printf(const char *format, ...)
 {
     int count;
     va_list ptr;
-   
+    int size;
+    int i;
+    int percentage_found;
 
     if (!format)
         return (-1);
+    size = ft_strlen(format);   
     va_start(ptr, format);
-    count =0;
-    while (*format)
+    count = 0;
+    i = 0;
+    while (i < size)
     {
-        if(*format != '%' )
-            count = count + ft_putchar_fd(*format,1);
-        else if (*format == '%')
-        {  
-            count+= printer(ptr , *(format + 1));
-            format++;
+        if(format[i] != '%')
+            count = count + ft_putchar_fd(format[i],1);
+        else if (format[i] == '%')
+        {
+            if (!(format[i + 1]) && !percentage_found)
+                return -1; 
+            percentage_found = 1;
+            count+= printer(ptr , format[i + 1]);
+            i++;
         }
-        format++;
+        i++;
     }
     return count;
 }

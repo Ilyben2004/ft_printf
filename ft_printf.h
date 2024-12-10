@@ -13,6 +13,6 @@ int ft_puthex(unsigned int number, char c);
 int	ft_putnbr_fd(long nb, int fd);
 int ft_putrevstr(char *str);
 int	ft_putstr_fd(char *s, int fd);
-size_t	ft_strlen(const char *s);
+int	ft_strlen(const char *s);
 int hexsize(unsigned long test);
 #endif
