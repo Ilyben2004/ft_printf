@@ -132,9 +132,8 @@
 // }
 int main ()
 {
-	 int a =  printf(" %c %c %cl", '0', 0, '1');
+	 int a = printf("dhcodhc%\0oudhcohdckca");
 	 printf("\n");
-	 int b =  ft_printf(" %c %c %cl", '0', 0, '1');
-	 printf("\na = %d , b = %d",a,b);
+	 printf("a = %d",a);
 
 }

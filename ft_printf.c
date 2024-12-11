@@ -6,7 +6,7 @@
 /*   By: ibennaje <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:02:40 by ibennaje          #+#    #+#             */
-/*   Updated: 2024/12/11 11:13:07 by ibennaje         ###   ########.fr       */
+/*   Updated: 2024/12/11 11:57:21 by ibennaje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,12 @@ int	printer(va_list ptr, char c)
 	else if (c == '%')
 		return (ft_putchar_fd('%', 1));
 	else
-		return (ft_putchar_fd('%', 1) + ft_putchar_fd(c, 1));
+		if (c != 0)
+			return (ft_putchar_fd('%', 1) + ft_putchar_fd(c, 1));
+		else
+			return (ft_putchar_fd('%',1));
 }
+
 
 int	ft_printf(const char *format, ...)
 {
