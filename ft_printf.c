@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ibennaje <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 11:02:40 by ibennaje          #+#    #+#             */
+/*   Updated: 2024/12/11 11:13:07 by ibennaje         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	printer(va_list ptr, char c)
@@ -16,7 +28,7 @@ int	printer(va_list ptr, char c)
 		return (ft_puthex((unsigned int)va_arg(ptr, unsigned int), c));
 	else if (c == 'p')
 	{
-		a = (unsigned long)va_arg(ptr, void *);
+		a = (unsigned long) va_arg(ptr, void *);
 		return (ft_putadresse(a));
 	}
 	else if (c == '%')
@@ -26,21 +38,20 @@ int	printer(va_list ptr, char c)
 }
 
 int	ft_printf(const char *format, ...)
-
 {
-	int count;
-	va_list ptr;
-	int size;
-	int i;
-	int percentage_found;
+	int		count;
+	va_list	ptr;
+	int		size;
+	int		i;
+	int		percentage_found;
 
 	if (!format)
 		return (-1);
 	size = ft_strlen(format);
 	va_start(ptr, format);
 	count = 0;
-	i = 0;
-	while (i < size)
+	i = -1;
+	while (++i < size)
 	{
 		if (format[i] != '%')
 			count = count + ft_putchar_fd(format[i], 1);
@@ -48,12 +59,9 @@ int	ft_printf(const char *format, ...)
 		{
 			if (!(format[i + 1]) && !percentage_found)
 				return (-1);
-			if (format[i + 1] != '%')
-				percentage_found = 1;
-			count += printer(ptr, format[i + 1]);
-			i++;
+			percentage_found = 1;
+			count += printer(ptr, format[(i++) + 1]);
 		}
-		i++;
 	}
 	return (count);
 }
